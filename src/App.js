@@ -9,6 +9,8 @@ import PrivateRoute from './components/PrivateRoute';
 import AuthRoute from './components/AuthRoute';
 import Home from './components/home';
 import NotFound from './components/notFound/notFound';
+import Carts from './components/carts';
+import Detail from './components/detail';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,11 +40,23 @@ function App() {
           exact path='/'
           element={
             <PrivateRoute>
-              <button onClick={()=>{setIsLoginFalse()}}>logOut</button>
-              <p>{user}: {pass}</p>
-              <Home />
+              <Home setIsLoginFalse={setIsLoginFalse} />
             </PrivateRoute>
           } />
+        <Route
+          path='/carts'
+          element={ 
+          <PrivateRoute>
+            <Carts />
+          </PrivateRoute>}
+          />
+        <Route
+          path='/detail'
+          element={ 
+          <PrivateRoute>
+            <Detail />
+          </PrivateRoute>}
+          />
         <Route
           path='*'
           element={<NotFound />}
